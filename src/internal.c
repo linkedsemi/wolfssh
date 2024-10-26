@@ -3249,7 +3249,7 @@ int GetMpint(word32* mpintSz, const byte** mpint,
 int GetString(char* s, word32* sSz, const byte* buf, word32 len, word32 *idx)
 {
     int result;
-    word32 strSz;
+    word32 strSz = 0;
 
     result = GetUint32(&strSz, buf, len, idx);
 
@@ -3276,7 +3276,7 @@ int GetStringAlloc(void* heap, char** s, const byte* buf, word32 len, word32 *id
 {
     int result;
     char* str;
-    word32 strSz;
+    word32 strSz = 0;
 
     result = GetUint32(&strSz, buf, len, idx);
 
@@ -7806,7 +7806,7 @@ static int DoChannelOpen(WOLFSSH* ssh,
 static int DoChannelOpenConf(WOLFSSH* ssh,
                              byte* buf, word32 len, word32* idx)
 {
-    WOLFSSH_CHANNEL* channel;
+    WOLFSSH_CHANNEL* channel = NULL;
     word32 begin, channelId, peerChannelId,
            peerInitialWindowSz, peerMaxPacketSz;
     int ret = WS_SUCCESS;

@@ -709,10 +709,10 @@ static INLINE void tcp_set_nonblocking(WS_SOCKET_T* sockfd)
         defined(WOLFSSL_NUCLEUS)
          /* non blocking not supported, for now */
     #else
-        int flags = fcntl(*sockfd, F_GETFL, 0);
+        int flags = zsock_fcntl(*sockfd, F_GETFL, 0);
         if (flags < 0)
             err_sys("fcntl get failed");
-        flags = fcntl(*sockfd, F_SETFL, flags | O_NONBLOCK);
+        flags = zsock_fcntl(*sockfd, F_SETFL, flags | O_NONBLOCK);
         if (flags < 0)
             err_sys("fcntl set failed");
     #endif
